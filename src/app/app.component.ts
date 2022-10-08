@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { HttpService } from './services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ordersystem-client';
+  public http :HttpService;
+
+  constructor(private injector: Injector) {
+    this.http = this.injector.get(HttpService);
+  }
 }

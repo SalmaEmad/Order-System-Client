@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h3 class="mt-4 px-4 fw-bold">Products</h3>
+  <div class="row mt-4 px-4">
+    <div class="col-3" *ngFor="let product of products">
+      <div class="card mb-3" style="width: 18rem;" >
+        <div class="card-body text-center">
+          <img class="card-img-top" [src]="BaseURL + product.ProductImage" alt="" width="100" height="150">
+          <h5 class="card-title mt-1">{{product.ProductName}}</h5>
+          <p class="card-text">{{product.ProductPrice | currency:'EGP'}}</p>
+          <button class="btn" (click)="purchaseProduct(product.ProductId)"
+          [disabled]="purchasedProducts.includes(product)">Purchase Product</button>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>

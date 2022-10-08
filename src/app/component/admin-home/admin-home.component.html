@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-between px-4">
+        <h3 class="mt-4 fw-bold">Products</h3>
+        <button class="btn btn-primary h-fit align-self-center" data-bs-toggle="modal" data-bs-target="#addModal">+ Add Product</button>
+    </div>
+    
+    <div class="row mt-4 px-4">
+      <div class="col-3" *ngFor="let product of products">
+        <div class="card mb-3" style="width: 18rem;" >
+          <div class="card-body text-center">
+            <img class="card-img-top" [src]="BaseURL + product.ProductImage" alt="" width="100" height="150">
+            <h5 class="card-title mt-1 fw-bold">{{product.ProductName}}</h5>
+            <p class="card-text">{{product.ProductPrice | currency:'EGP'}}</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#editModal" (click)="openEditForm(product.ProductId)">
+                    <img src="../../../assets/images/edit.png" alt="edit" width="30">
+                </button>
+                <button class="btn" (click)="deleteProduct(product.ProductId)">
+                    <img src="../../../assets/images/delete.png" alt="delete" width="30">
+                </button>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Edit modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form class="form p-5" [formGroup]="editForm" (ngSubmit)="editProduct()">
+              <div class="modal-body pt-0">
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control h-fit" id="floatingName" placeholder="Name" formControlName="productName">
+                      <label for="floatingName">Product Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <input type="number" class="form-control h-fit" id="floatingPrice" placeholder="00.00" formControlName="price">
+                      <label for="floatingPrice">Price</label>
+                  </div>
+              </div>
+              <div class="text-center">
+                  <button type="submit" class="btn btn-primary me-2" 
+                    [disabled]="editForm.invalid" data-bs-dismiss="modal">Save changes</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="form p-5" [formGroup]="addForm" (ngSubmit)="addNewProduct()">
+                <div class="modal-body pt-0">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control h-fit" id="floatingName" placeholder="Name" formControlName="productName">
+                        <label for="floatingName">Product Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control h-fit" id="floatingPrice" placeholder="00.00" formControlName="price">
+                        <label for="floatingPrice">Price</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile01" (change)="onAddFilesSelected($event)">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary me-2" 
+                      [disabled]="addForm.invalid" data-bs-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>

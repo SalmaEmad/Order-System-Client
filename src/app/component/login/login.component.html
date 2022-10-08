@@ -1,0 +1,37 @@
+<div class="container-fluid w-100 h-100">
+    <div class="row">
+        
+        <div class="col align-self-center">
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <img src="../../../assets/images/logo.png" alt="" width="300">
+                </div>
+            </div>
+            <form class="form p-5" [formGroup]="LoginForm" (ngSubmit)="login()">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="Username" formControlName="username">
+                    <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password"  formControlName="password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                <button type="submit" [disabled]="LoginForm.invalid || loading" class="btn btn-lg w-100 submit-btn rounded-border py-3">
+                    <div class="spinner-border text-light" role="status" *ngIf="loading"></div>
+                    Login
+                </button>
+                <div class="toast position-absolute top-0 start-50 translate-middle-x mt-1 d-block bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true" style="opacity: 1;" 
+            *ngIf="alert">
+                <div class="d-flex">
+                    <div class="toast-body fs-6 m-auto">
+                        Username or Password is incorrect
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col">
+            <img class="w-100 h-100" src="../../assets/images/login.jpg" alt="LoginBg">
+        </div>
+    </div>
+</div>
